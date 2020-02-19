@@ -21,7 +21,7 @@ class Recipe(models.Model):
         (HARD, "Hard"),
     ]
     difficulty = models.CharField(
-        max_length=1, choices=DIFFICULTY_CHOICES, default=EASY,  # blank=False
+        max_length=1, choices=DIFFICULTY_CHOICES, default=EASY,
     )
 
 
@@ -29,8 +29,8 @@ class Ingredient(models.Model):
     name = models.CharField(max_length=30, unique=True)
     recipes = models.ManyToManyField(Recipe)
 
-    # class Meta:
-    #     ordering = ['headline']
+    def __str__(self):
+        return self.name
 
 
 class Like:
