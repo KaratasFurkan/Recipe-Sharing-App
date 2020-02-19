@@ -1,11 +1,23 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  {% for recipe in recipes %}
-    <div>
-      <h1>{{ recipe.name }}</h1>
-      <img alt="{{ recipe.name }}" src="{{ recipe.image.url }}"/>
-      <p>{{ recipe.description }}</p>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-9">
+        {% for recipe in recipes %}
+          <div>
+            <h1>{{ recipe.name }}</h1>
+            <img alt="{{ recipe.name }}" src="{{ recipe.image.url }}"/>
+            <p>{{ recipe.description }}</p>
+          </div>
+        {% endfor %}
+      </div>
+      <div class="col-3">
+        <p>Cursus vitae congue mauris rhoncus aenean vel elit
+          scelerisque mauris pellentesque pulvinar pellentesque habitant
+          morbi tristique senectus et netus et malesuada! Pellentesque
+          nec nam aliquam sem et tortor consequat id!</p>
+      </div>
     </div>
-  {% endfor %}
+  </div>
 {% endblock content %}
