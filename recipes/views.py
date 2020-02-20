@@ -28,3 +28,18 @@ class ShareView(CreateView):
 
 def detail(request):
     return render(request, "detail.html")
+
+
+class ListByIngredientView(ListView):
+    model = Recipe
+    ordering = "-created_at"
+    context_object_name = "recipes"
+    extra_context = {
+        "ingredients": Ingredient.objects.annotate(
+            recipe_count=Count("recipe")
+        ).order_by("-recipe_count")[:5]
+    }
+    template_name = "recipes.html"
+
+    def get_queryset(self):
+        return Ingredient.objects.get(pk=self.kwargs["ingredient_pk"]).recipe_set.all()
