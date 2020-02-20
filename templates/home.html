@@ -5,20 +5,35 @@
     <div class="row">
       <div class="col-9">
         {% for recipe in recipes %}
-          <div class="card mb-3">
+          <div class="card m-4">
             <div class="card-body">
-              <h1 class="card-title">{{ recipe.name }}</h1>
+              <h2 class="card-title">{{ recipe.name }}</h2>
               <img class="img-fluid mb-3" alt="{{ recipe.name }}" src="{{ recipe.image.url }}"/>
               <p class="card-text">{{ recipe.description }}</p>
+              <p class="mb-0">{{ recipe.created_at }} - by {{ recipe.created_by }}</p>
             </div>
           </div>
         {% endfor %}
       </div>
       <div class="col-3">
-        <p>Cursus vitae congue mauris rhoncus aenean vel elit
-          scelerisque mauris pellentesque pulvinar pellentesque habitant
-          morbi tristique senectus et netus et malesuada! Pellentesque
-          nec nam aliquam sem et tortor consequat id!</p>
+        <div class="card m-4">
+          <div class="card-body">
+            <h3 class="card-title">Search</h3>
+
+          </div>
+        </div>
+        <div class="card m-4">
+          <div class="card-body">
+            <h3 class="card-title">Top Used Ingredients</h3>
+            <ul>
+              {% for ingredient in ingredients %}
+                <li>
+                  <a href="#">{{ ingredient.name }} ({{ ingredient.recipe_count }})</a>
+                </li>
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
       </div>
     </div>
   </div>
