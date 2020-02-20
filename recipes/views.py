@@ -1,7 +1,7 @@
 from django.db.models import Count
 from django.shortcuts import render
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, ListView
+from django.views.generic import CreateView, DetailView, ListView
 
 from .forms import RecipeForm
 from .models import Ingredient, Recipe
@@ -26,8 +26,11 @@ class ShareView(CreateView):
     template_name = "share.html"
 
 
-def detail(request):
-    return render(request, "detail.html")
+class RecipeDetailView(DetailView):
+    model = Recipe
+    context_object_name = "recipe"
+    pk_url_kwarg = "ingredient_pk"
+    template_name = "detail.html"
 
 
 class ListByIngredientView(ListView):
