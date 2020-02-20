@@ -28,7 +28,7 @@
             <ul>
               {% for ingredient in ingredients %}
                 <li>
-                  <a href="#">{{ ingredient.name }} ({{ ingredient.recipe_count }})</a>
+                  <a href="{% url 'recipes' ingredient.pk %}">{{ ingredient.name }} ({{ ingredient.recipe_count }})</a>
                 </li>
               {% endfor %}
             </ul>
