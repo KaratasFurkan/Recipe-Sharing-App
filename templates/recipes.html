@@ -7,8 +7,12 @@
         {% for recipe in recipes %}
           <div class="card m-4">
             <div class="card-body">
-              <h2 class="card-title">{{ recipe.name }}</h2>
-              <img class="img-fluid mb-3" alt="{{ recipe.name }}" src="{{ recipe.image.url }}"/>
+              <h2 class="card-title">
+                <a class="text-dark" href="{% url 'detail' recipe.pk %}">{{ recipe.name }}</a>
+              </h2>
+              <a href="{% url 'detail' recipe.pk %}">
+                <img class="img-fluid mb-3" alt="{{ recipe.name }}" src="{{ recipe.image.url }}"/>
+              </a>
               <p class="card-text">{{ recipe.description }}</p>
               <p class="mb-0">{{ recipe.created_at }} - by {{ recipe.created_by }}</p>
             </div>
