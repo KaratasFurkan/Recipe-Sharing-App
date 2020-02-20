@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% load widget_tweaks %}
+
+{% block title %}{{ recipe.name }}{% endblock %}
+
+{% block content %}
+  <h2>{{ recipe.name }}</h2>
+  <img class="img-fluid mb-3" alt="{{ recipe.name }}" src="{{ recipe.image.url }}"/>
+  <h4>Ingredients</h4>
+  <ul>
+    {% for ingredient in recipe.ingredients.all %}
+      <li>{{ ingredient.name }}</li>
+    {% endfor %}
+  </ul>
+  <h4>Description</h4>
+  <p>{{ recipe.description }}</p>
+{% endblock %}
