@@ -24,4 +24,9 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("", views.RecipeListView.as_view(), name="home"),
     path("share/", views.ShareView.as_view(), name="share"),
+    path(
+        "recipes/<int:ingredient_pk>/",
+        views.ListByIngredientView.as_view(),
+        name="recipes",
+    ),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
