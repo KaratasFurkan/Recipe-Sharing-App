@@ -30,7 +30,6 @@ class Recipe(models.Model):
 
 class Ingredient(models.Model):
     name = models.CharField(max_length=30, unique=True)
-    recipes = models.ManyToManyField(Recipe)
 
     def __str__(self):
         return self.name
