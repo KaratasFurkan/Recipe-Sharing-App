@@ -29,4 +29,7 @@ urlpatterns = [
         views.ListByIngredientView.as_view(),
         name="recipes",
     ),
+    path(
+        "recipe/<int:ingredient_pk>/", views.RecipeDetailView.as_view(), name="detail"
+    ),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
