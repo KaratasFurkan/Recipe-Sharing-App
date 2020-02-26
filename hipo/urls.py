@@ -16,20 +16,29 @@ Including another URLconf
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
+from django.contrib.auth import views as auth_views
 from django.urls import path
 
-from recipes import views
+from accounts import views as accounts_views
+from recipes import views as recipes_views
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("", views.RecipeListView.as_view(), name="home"),
-    path("share/", views.ShareView.as_view(), name="share"),
+    path("", recipes_views.RecipeListView.as_view(), name="home"),
+    path("share/", recipes_views.ShareView.as_view(), name="share"),
     path(
         "recipes/<int:ingredient_pk>/",
-        views.ListByIngredientView.as_view(),
+        recipes_views.ListByIngredientView.as_view(),
         name="recipes",
     ),
     path(
-        "recipe/<int:ingredient_pk>/", views.RecipeDetailView.as_view(), name="detail"
+        "recipe/<int:ingredient_pk>/",
+        recipes_views.RecipeDetailView.as_view(),
+        name="detail",
     ),
+    path("signup/", accounts_views.Signup.as_view(), name="signup"),
+    path(
+        "login/", auth_views.LoginView.as_view(template_name="login.html"), name="login"
+    ),
+    path("logout/", auth_views.LogoutView.as_view(), name="logout"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
