@@ -1,48 +1,11 @@
 {% extends 'base.html' %}
 
-{% load widget_tweaks %}
-
 {% block title %}Share a Recipe{% endblock %}
 
 {% block content %}
   <form method="post" enctype="multipart/form-data" novalidate>
     {% csrf_token %}
-
-    {% for field in form %}
-      <div class="form-group">
-        {{ field.label_tag }}
-
-        {% if form.is_bound %}
-          {% if field.errors %}
-
-            {% if field == form.image %}
-              {% render_field field class="form-control-file is-invalid" %}
-            {% else %}
-              {% render_field field class="form-control is-invalid" %}
-            {% endif %}
-            {% for error in field.errors %}
-              <div class="invalid-feedback">
-                {{ error }}
-              </div>
-            {% endfor %}
-
-          {% else %}
-            {% if field == form.image %}
-              {% render_field field class="form-control-file is-valid" %}
-            {% else %}
-              {% render_field field class="form-control is-valid" %}
-            {% endif %}
-          {% endif %}
-        {% else %}
-          {% if field == form.image %}
-            {% render_field field class="form-control-file" %}
-          {% else %}
-            {% render_field field class="form-control" %}
-          {% endif %}
-        {% endif %}
-      </div>
-    {% endfor %}
-
+    {% include 'includes/form.html' %}
     <button type="submit" class="btn btn-success">Share</button>
     <a href="{% url "home" %}" class="btn btn-light">Cancel</a>
   </form>
