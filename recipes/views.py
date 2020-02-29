@@ -1,5 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.db.models import Count
+from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
 from django.views.generic import CreateView, DetailView, ListView
@@ -26,8 +27,13 @@ class RecipeListView(ListView):
 class ShareView(CreateView):
     model = Recipe
     form_class = RecipeForm
-    success_url = reverse_lazy("home")
     template_name = "share.html"
+
+    def form_valid(self, form):
+        recipe = form.save(commit=False)
+        recipe.created_by = self.request.user
+        recipe.save()
+        return redirect("home")
 
 
 class RecipeDetailView(DetailView):
