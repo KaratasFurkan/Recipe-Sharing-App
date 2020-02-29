@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     "widget_tweaks",
     "recipes",
     "accounts",
+    "interactions",
     "django_extensions",
 ]
 

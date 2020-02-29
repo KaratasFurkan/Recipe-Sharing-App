@@ -7,6 +7,17 @@
 {% block content %}
   <h2>{{ recipe.name }}</h2>
   <img class="img-fluid mb-3" alt="{{ recipe.name }}" src="{{ recipe.image.url }}"/>
+  {% if user.is_authenticated %}
+    <div class="mb-3">
+      <a href="{% url "like" recipe_pk=recipe.pk %}">
+        {% if is_liked %}
+          <button type="submit" class="btn btn-success">Like ({{ recipe.like_set.count }})</button>
+        {% else %}
+          <button type="submit" class="btn btn-primary">Like ({{ recipe.like_set.count }})</button>
+        {% endif %}
+      </a>
+    </div>
+  {% endif %}
   <h4>Ingredients</h4>
   <ul>
     {% for ingredient in recipe.ingredients.all %}

@@ -20,6 +20,7 @@ from django.contrib.auth import views as auth_views
 from django.urls import path
 
 from accounts import views as accounts_views
+from interactions import views as interactions_views
 from recipes import views as recipes_views
 
 urlpatterns = [
@@ -41,4 +42,5 @@ urlpatterns = [
         "login/", auth_views.LoginView.as_view(template_name="login.html"), name="login"
     ),
     path("logout/", auth_views.LogoutView.as_view(), name="logout"),
+    path("like/<int:recipe_pk>/", interactions_views.LikeView.as_view(), name="like"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

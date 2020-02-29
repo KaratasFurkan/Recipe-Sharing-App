@@ -4,6 +4,8 @@ from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
 from django.views.generic import CreateView, DetailView, ListView
 
+from interactions.models import Like
+
 from .forms import RecipeForm
 from .models import Ingredient, Recipe
 
@@ -39,6 +41,13 @@ class RecipeDetailView(DetailView):
     context_object_name = "recipe"
     pk_url_kwarg = "recipe_pk"
     template_name = "detail.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["is_liked"] = Like.objects.filter(
+            recipe=context["recipe"], user=self.request.user
+        ).count()
+        return context
 
 
 class ListByIngredientView(ListView):

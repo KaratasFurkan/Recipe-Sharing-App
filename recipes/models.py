@@ -33,14 +33,3 @@ class Ingredient(models.Model):
 
     def __str__(self):
         return self.name
-
-
-class Like(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE)
-
-
-class Star(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE)
-    rate = models.IntegerField(choices=[(i, i) for i in range(1, 6)])
