@@ -1,7 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.db.models import Count
 from django.shortcuts import redirect
-from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
 from django.views.generic import CreateView, DetailView, ListView
 
@@ -39,7 +38,7 @@ class ShareView(CreateView):
 class RecipeDetailView(DetailView):
     model = Recipe
     context_object_name = "recipe"
-    pk_url_kwarg = "ingredient_pk"
+    pk_url_kwarg = "recipe_pk"
     template_name = "detail.html"
 
 
