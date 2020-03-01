@@ -24,7 +24,6 @@
           <div class="card-body">
             <h3 class="card-title">Search</h3>
             <form method="get" action={% url "search" %} novalidate>
-              {% csrf_token %}
               <div class="input-group mt-3">
                 <input name="search" type="text" class="form-control" placeholder="recipe, ingredient..">
                 <div class="input-group-append">
