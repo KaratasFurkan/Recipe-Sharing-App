@@ -44,4 +44,5 @@ urlpatterns = [
     path("logout/", auth_views.LogoutView.as_view(), name="logout"),
     path("like/<int:recipe_pk>/", interactions_views.LikeView.as_view(), name="like"),
     path("rate/<int:recipe_pk>/", interactions_views.RateView.as_view(), name="rate"),
+    path("search/", recipes_views.SearchView.as_view(), name="search"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
