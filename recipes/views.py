@@ -1,5 +1,5 @@
 from django.contrib.auth.decorators import login_required
-from django.db.models import Count
+from django.db.models import Count, Q
 from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
 from django.views.generic import CreateView, DetailView, ListView
@@ -59,7 +59,7 @@ class RecipeDetailView(DetailView):
         return context
 
 
-class ListByIngredientView(ListView):
+class ListByIngredientView(RecipeListView):
     context_object_name = "recipes"
     template_name = "recipes.html"
 
@@ -70,9 +70,19 @@ class ListByIngredientView(ListView):
             .order_by("-created_at")
         )
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["ingredients"] = Ingredient.objects.annotate(
-            recipe_count=Count("recipe")
-        ).order_by("-recipe_count")[:5]
-        return context
+
+class SearchView(RecipeListView):
+    model = Recipe
+    context_object_name = "recipes"
+    template_name = "recipes.html"
+
+    def get_queryset(self):
+        search = self.request.GET.get("search")
+        if search:
+            # NOTE: description can be useful too
+            obj_list = self.model.objects.filter(
+                Q(name__icontains=search) | Q(ingredients__name__icontains=search)
+            ).order_by("-created_at")
+        else:
+            obj_list = self.model.objects.all().order_by("-created_at")
+        return obj_list
