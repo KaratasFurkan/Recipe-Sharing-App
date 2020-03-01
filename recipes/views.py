@@ -16,6 +16,7 @@ class RecipeListView(ListView):
     ordering = "-created_at"
     context_object_name = "recipes"
     template_name = "recipes.html"
+    paginate_by = 2
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -80,9 +81,13 @@ class SearchView(RecipeListView):
         search = self.request.GET.get("search")
         if search:
             # NOTE: description can be useful too
-            obj_list = self.model.objects.filter(
-                Q(name__icontains=search) | Q(ingredients__name__icontains=search)
-            ).order_by("-created_at")
+            obj_list = (
+                self.model.objects.filter(
+                    Q(name__icontains=search) | Q(ingredients__name__icontains=search)
+                )
+                .order_by("-created_at")
+                .distinct()
+            )
         else:
             obj_list = self.model.objects.all().order_by("-created_at")
         return obj_list
