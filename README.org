@@ -14,13 +14,13 @@ internship application project of [[https://hipolabs.com/][Hipo]] in 2019.
 
 ** Project Details
 - In this project, users will share and search recipes. For example,
-someone who cook delicious ​Ratatouille​, may share it’s recipe. Also,
-someone who would like to cook a dish, may search a recipe.
+  someone who cook delicious ​Ratatouille​, may share it’s recipe. Also,
+  someone who would like to cook a dish, may search a recipe.
 - Only registered users can share, like and rate recipe. Anonymous users
-can only consume the content.
+  can only consume the content.
 - The website stores users, recipes, ingredients, likes and ratings
-in SQLite database and display most used 5 ingredients at the right
-side of the page.
+  in SQLite database and display most used 5 ingredients at the right
+  side of the page.
 - Recipes in homepage ordered by creation time.
 - Ingredients in sidebar goes to list of recipes the ingredient used.
 
@@ -59,4 +59,4 @@ side of the page.
   python manage.py runserver
 #+end_src
 
-2. Open http://localhost:8000 to view it in the browser.
+2. Open [[http://localhost:8000]] to view it in the browser.
