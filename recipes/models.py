@@ -1,5 +1,6 @@
 from django.contrib.auth.models import User
 from django.db import models
+from django.db.models import Avg
 
 
 class Recipe(models.Model):
@@ -26,6 +27,10 @@ class Recipe(models.Model):
 
     def __str__(self):
         return self.name
+
+    def get_avg_rate(self):
+        avg = self.rate_set.aggregate(Avg("rate"))["rate__avg"]
+        return avg if avg is not None else 0
 
 
 class Ingredient(models.Model):

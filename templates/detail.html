@@ -6,24 +6,36 @@
 
 {% block content %}
   <h2>{{ recipe.name }}</h2>
+
   <img class="img-fluid mb-3" alt="{{ recipe.name }}" src="{{ recipe.image.url }}"/>
-  {% if user.is_authenticated %}
-    <div class="mb-3">
-      <a href="{% url "like" recipe_pk=recipe.pk %}">
-        {% if is_liked %}
-          <button type="submit" class="btn btn-success">Like ({{ recipe.like_set.count }})</button>
-        {% else %}
-          <button type="submit" class="btn btn-primary">Like ({{ recipe.like_set.count }})</button>
-        {% endif %}
-      </a>
-    </div>
-  {% endif %}
+
+  <form method="post" action={% url "like" recipe_pk=recipe.pk %} novalidate class="mb-3">
+    {% csrf_token %}
+    {% if is_liked %}
+      <button type="submit" class="btn btn-success">Like ({{ recipe.like_set.count }})</button>
+    {% else %}
+      <button type="submit" class="btn btn-primary">Like ({{ recipe.like_set.count }})</button>
+    {% endif %}
+  </form>
+
   <h4>Ingredients</h4>
   <ul>
     {% for ingredient in recipe.ingredients.all %}
       <li>{{ ingredient.name }}</li>
     {% endfor %}
   </ul>
+
   <h4>Description</h4>
   <p>{{ recipe.description }}</p>
+
+  <form method="post" action={% url "rate" recipe_pk=recipe.pk %} novalidate>
+    {% csrf_token %}
+    {% render_field rate_form.rate class="custom-select" style="width:auto"%}
+    {% if is_rated %} <!--TODO: display given rate as selected-->
+      <button type="submit" class="btn btn-success">Rate</button>
+    {% else %}
+      <button type="submit" class="btn btn-primary">Rate</button>
+    {% endif %}
+  </form>
+
 {% endblock %}

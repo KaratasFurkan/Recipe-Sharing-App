@@ -4,7 +4,8 @@ from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
 from django.views.generic import CreateView, DetailView, ListView
 
-from interactions.models import Like
+from interactions.forms import RateForm
+from interactions.models import Like, Rate
 
 from .forms import RecipeForm
 from .models import Ingredient, Recipe
@@ -44,9 +45,17 @@ class RecipeDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["is_liked"] = Like.objects.filter(
-            recipe=context["recipe"], user=self.request.user
-        ).count()
+        context["rate_form"] = RateForm
+        if self.request.user.is_authenticated:
+            context["is_liked"] = Like.objects.filter(
+                recipe=context["recipe"], user=self.request.user
+            )
+            context["is_rated"] = Rate.objects.filter(
+                recipe=context["recipe"], user=self.request.user
+            )
+        else:
+            context["is_liked"] = False
+            context["is_rated"] = False
         return context
 
 

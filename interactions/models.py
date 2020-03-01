@@ -12,4 +12,4 @@ class Like(models.Model):
 class Rate(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE)
-    rate = models.IntegerField(choices=[(i, i) for i in range(1, 6)])
+    rate = models.IntegerField(choices=[(i, i) for i in range(1, 6)], default=5)
