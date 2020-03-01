@@ -7,6 +7,8 @@
 {% block content %}
   <h2>{{ recipe.name }}</h2>
 
+  <p>{{ recipe.created_by }}  |  {{ recipe.get_difficulty_display }}  |  {{ recipe.created_at }}</p>
+
   <img class="img-fluid mb-3" alt="{{ recipe.name }}" src="{{ recipe.image.url }}"/>
 
   <form method="post" action={% url "like" recipe_pk=recipe.pk %} novalidate class="mb-3">
@@ -28,7 +30,7 @@
   <h4>Description</h4>
   <p>{{ recipe.description }}</p>
 
-  <form method="post" action={% url "rate" recipe_pk=recipe.pk %} novalidate>
+  <form method="post" action={% url "rate" recipe_pk=recipe.pk %} novalidate class="mb-3">
     {% csrf_token %}
     {% render_field rate_form.rate class="custom-select" style="width:auto"%}
     {% if is_rated %} <!--TODO: display given rate as selected-->
