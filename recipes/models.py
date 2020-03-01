@@ -30,7 +30,7 @@ class Recipe(models.Model):
 
     def get_avg_rate(self):
         avg = self.rate_set.aggregate(Avg("rate"))["rate__avg"]
-        return avg if avg is not None else 0
+        return round(avg, 2) if avg is not None else 0
 
 
 class Ingredient(models.Model):
