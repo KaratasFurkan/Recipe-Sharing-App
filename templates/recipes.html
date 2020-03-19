@@ -14,7 +14,11 @@
                 <img class="img-fluid mb-3" style="max-height:200px" alt="{{ recipe.name }}" src="{{ recipe.image.url }}"/>
               </a>
               <p class="card-text">{{ recipe.description }}</p>
-              <p class="mb-0">{{ recipe.created_at }} - {{ recipe.get_avg_rate }}/5 ({{ recipe.rate_set.count }} Votes) -  {{ recipe.like_set.count }} likes - by {{ recipe.created_by }}</p>
+              <p class="mb-0">{{ recipe.created_at }} · {{ recipe.get_avg_rate }}/5 ({{ recipe.rate_set.count }} Votes) ·  {{ recipe.like_set.count }} likes · by {{ recipe.created_by }}
+                {% if recipe.created_by == user %}
+                  · <a href="{% url "edit" recipe.pk %}" class="btn btn-primary btn-sm" role="button">Edit</a>
+                {% endif %}
+              </p>
             </div>
           </div>
         {% endfor %}

@@ -2,7 +2,9 @@ from django.contrib.auth.decorators import login_required
 from django.db.models import Count, Q
 from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
-from django.views.generic import CreateView, DetailView, ListView
+from django.views.generic import CreateView, DetailView, ListView, UpdateView
+from django.utils import timezone
+from django.shortcuts import redirect
 
 from interactions.forms import RateForm
 from interactions.models import Like, Rate
@@ -36,6 +38,25 @@ class ShareView(CreateView):
     def form_valid(self, form):
         form.instance.created_by = self.request.user
         return super().form_valid(form)
+
+
+@method_decorator(login_required, name="dispatch")
+class RecipeUpdateView(UpdateView):
+    model = Recipe
+    form_class = RecipeForm
+    template_name = "edit_recipe.html"
+    pk_url_kwarg = "recipe_pk"
+    context_object_name = "recipe"
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        return queryset.filter(created_by=self.request.user)
+
+    def form_valid(self, form):
+        recipe = form.save(commit=False)
+        recipe.updated_at = timezone.now()
+        recipe.save()
+        return redirect("detail", recipe_pk=recipe.pk)
 
 
 class RecipeDetailView(DetailView):

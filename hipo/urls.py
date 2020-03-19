@@ -45,4 +45,9 @@ urlpatterns = [
     path("like/<int:recipe_pk>/", interactions_views.LikeView.as_view(), name="like"),
     path("rate/<int:recipe_pk>/", interactions_views.RateView.as_view(), name="rate"),
     path("search/", recipes_views.SearchView.as_view(), name="search"),
+    path(
+        "recipe/<int:recipe_pk>/edit/",
+        recipes_views.RecipeUpdateView.as_view(),
+        name="edit",
+    ),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

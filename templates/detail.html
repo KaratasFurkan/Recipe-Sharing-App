@@ -40,4 +40,8 @@
     {% endif %}
   </form>
 
+  {% if recipe.created_by == user %}
+    <a href="{% url "edit" recipe.pk %}" class="btn btn-primary btn-md mb-3" role="button">Edit</a>
+  {% endif %}
+
 {% endblock %}
