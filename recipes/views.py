@@ -102,12 +102,14 @@ class SearchView(RecipeListView):
         search = self.request.GET.get("search")
         if search:
             # NOTE: description can be useful too
+            search = search.replace(",", " ").split()  # parse search string
+            query = Q()
+            # Search all keywords in both recipe name and recipe ingredients
+            for keyword in search:
+                query |= Q(name__icontains=keyword)
+                query |= Q(ingredients__name__icontains=keyword)
             obj_list = (
-                self.model.objects.filter(
-                    Q(name__icontains=search) | Q(ingredients__name__icontains=search)
-                )
-                .order_by("-created_at")
-                .distinct()
+                self.model.objects.filter(query).order_by("-created_at").distinct()
             )
         else:
             obj_list = self.model.objects.all().order_by("-created_at")
