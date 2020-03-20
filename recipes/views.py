@@ -56,6 +56,7 @@ class RecipeUpdateView(UpdateView):
         recipe = form.save(commit=False)
         recipe.updated_at = timezone.now()
         recipe.save()
+        form.save_m2m()
         return redirect("detail", recipe_pk=recipe.pk)
 
 
