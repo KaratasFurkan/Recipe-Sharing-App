@@ -1,22 +1,8 @@
-asgiref==3.2.3
-blessings==1.7
-bpython==0.18
-certifi==2019.11.28
-chardet==3.0.4
-curtsies==0.3.1
-Django==3.0.3
+django==3.0.3
 django-extensions==2.2.8
 django-widget-tweaks==1.4.5
-epc==0.0.5
-greenlet==0.4.15
-idna==2.8
-importmagic==0.1.7
-Pillow==7.0.0
-Pygments==2.5.2
-pytz==2019.3
-requests==2.22.0
-sexpdata==0.0.3
-six==1.14.0
-sqlparse==0.3.0
-urllib3==1.25.8
-wcwidth==0.1.8
+pillow==7.0.0
+# asgiref==3.2.3 # Installed as dependency for django
+# pytz==2019.3 # Installed as dependency for django
+# sqlparse==0.3.0 # Installed as dependency for django
+# six==1.14.0 # Installed as dependency for django-extensions
