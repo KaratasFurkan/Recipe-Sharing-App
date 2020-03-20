@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 
+{% load static %}
+
 {% load widget_tweaks %}
 
 {% block title %}{{ recipe.name }}{% endblock %}
@@ -7,7 +9,14 @@
 {% block content %}
   <h2>{{ recipe.name }}</h2>
 
-  <p>{{ recipe.created_by }}  |  {{ recipe.get_difficulty_display }}  |  {{ recipe.created_at }}</p>
+  <p>
+    <img class="mb-1" alt="knife" src="{% static "img/knife.png" %}"/>
+    {{ recipe.created_by }}
+    <img class="mb-1" alt="muscle" src="{% static "img/muscle.png" %}"/>
+    {{ recipe.get_difficulty_display }}
+    <img class="mb-1" alt="clock" src="{% static "img/clock.png" %}"/>
+    {{ recipe.created_at|date:"j/n/Y" }}
+  </p>
 
   <img class="img-fluid mb-3" alt="{{ recipe.name }}" src="{{ recipe.image.url }}"/>
 
