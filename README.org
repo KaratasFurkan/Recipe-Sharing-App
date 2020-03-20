@@ -26,37 +26,44 @@ internship application project of [[https://hipolabs.com/][Hipo]] in 2019.
 
 
 * Installation
-1. Clone this repository:
+Clone this repository:
 
 #+begin_src bash
-  git clone https://github.com/KaratasFurkan/Recipe-Sharing-App.git
+  $ git clone https://github.com/KaratasFurkan/Recipe-Sharing-App.git
 #+end_src
 
-2. Create and activate a virtual environment in the project folder:
+Create and activate a virtual environment in the project folder:
 
 #+begin_src bash
-  python -m venv env
-  source env/bin/activate
+  $ python -m venv env
+  $ source env/bin/activate
 #+end_src
 
-3. Install the requirements:
+Install the requirements:
 
 #+begin_src bash
-  pip install -r requirements.txt
+  $ pip install -r requirements.txt
 #+end_src
 
-4. Migrate database
+Create database
 
 #+begin_src bash
-  python manage.py migrate
+  $ sudo -u postgres psql
+  postgres=# CREATE DATABASE recipes;
+#+end_src
+
+Migrate database
+
+#+begin_src bash
+  $ python manage.py migrate
 #+end_src
 
 * Usage
 
-1. To start server, run this command in the project directory:
+To start server, run this command in the project directory:
 
 #+begin_src bash
-  python manage.py runserver
+  $ python manage.py runserver
 #+end_src
 
-2. Open [[http://localhost:8000]] to view it in the browser.
+Open [[http://localhost:8000]] to view it in the browser.
