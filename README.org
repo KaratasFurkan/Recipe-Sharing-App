@@ -10,7 +10,7 @@
 
 * About
 A recipe sharing application built with Django. This project was the
-internship application project of [[https://hipolabs.com/][Hipo]] in 2019.
+internship application [[file:Backend Exercise v3.1.pdf][project]] of [[https://hipolabs.com/][Hipo]] in 2019.
 
 ** Project Details
 - In this project, users will share and search recipes. For example,
@@ -19,7 +19,7 @@ internship application project of [[https://hipolabs.com/][Hipo]] in 2019.
 - Only registered users can share, like and rate recipe. Anonymous users
   can only consume the content.
 - The website stores users, recipes, ingredients, likes and ratings
-  in SQLite database and display most used 5 ingredients at the right
+  in PostgreSQL database and display most used 5 ingredients at the right
   side of the page.
 - Recipes in homepage ordered by creation time.
 - Ingredients in sidebar goes to list of recipes the ingredient used.
