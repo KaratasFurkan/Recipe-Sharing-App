@@ -1,4 +1,4 @@
-django==3.0.3
+django==3.0.7
 django-extensions==2.2.8
 django-widget-tweaks==1.4.5
 pillow==7.0.0
